@@ -1,17 +1,14 @@
-const { stdin, stdout } = process;
-const fs = require('fs');
-const output = fs.createWriteStream('destination.txt');
-const input = fs.createReadStream('destination.txt', 'utf-8');
+const { stdin, stdout } = process; 
+const fs = require('fs'); 
 
 stdout.write('Привет!\n')
 stdin.on('data', data => {
   const name = data.toString();
-  process.exit();
+  fs.writeFile("textfile1.txt", name, function(err) { 
+    if(err) { 
+        return console.log(err);
+    }
+    process.exit();
+  });
 });
-input.on('data', chunk => output.write(chunk));
-input.on('error', error => console.log('Error', error.message));
-
-
-
-
 
